@@ -1,23 +1,13 @@
 version: '3.1'
-networks:
-  - net1
-  - net2
-  - net3
-  - net4
-  - net5
 services:
   db:
     image: mysql
-    networks:
-      - net1
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: micro_yt
   eureka:
     image: openjdk:17.0.2-jdk-oracle
     command: java -jar /app/application.jar
-    networks:
-      - net2
     ports:
       - 8000:8761
     environment:
@@ -27,8 +17,6 @@ services:
   quiz-service:
     image: openjdk:17.0.2-jdk-oracle
     command: java -jar /app/application.jar
-    networks:
-      - net3
     environment:
       - DB_HOST=db
       - DB_DATABASE=micro_yt
@@ -41,8 +29,6 @@ services:
   question-service:
     image: openjdk:17.0.2-jdk-oracle
     command: java -jar /app/application.jar
-    networks:
-      - net4
     environment:
       - DB_HOST=db
       - DB_DATABASE=micro_yt
@@ -55,8 +41,6 @@ services:
   api-gateway:
     image: openjdk:17.0.2-jdk-oracle
     command: java -jar /app/application.jar
-    networks:
-      - net5
     ports:
       - 8080:8083
     environment:
